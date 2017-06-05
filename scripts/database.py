@@ -1,0 +1,115 @@
+import csv
+import os
+
+
+class Database(object):
+	"""docstring for Database"""
+	def __init__(self, fname, keys, defaultcols = []):
+		self.fname = fname
+		self.keys = keys
+		self.cols = defaultcols
+		self.f = None
+		self.data = {} # key => {col => value}
+
+	def addColumn(self, col):
+		if col in self.cols:
+			return
+		self.cols.append(col)
+	def addColumns(self, cols):
+		for col in cols:
+			if col not in self.cols:
+				self.cols.append(col)
+	
+	def open(self):
+		# Load DS from file
+		if os.path.isfile(self.fname):
+			with open(self.fname, 'rb') as f:
+				reader = csv.reader(f, delimiter=';', quotechar='"')
+				headers = reader.next()
+				if headers[:len(self.keys)] != self.keys:
+					raise Exception("Mismatching keys!")
+				for h in headers[len(self.keys):]:
+					if h not in self.cols:
+						self.cols.append(h)
+				for x in reader:
+					key = tuple(x[:len(self.keys)])
+					if not key in self.data:
+						self.data[key] = {}
+					for i in xrange(len(self.keys), len(x)):
+						self.data[key][headers[i]] = x[i]
+			print "Database:",len(self.data),"rows loaded!"
+
+	def close(self):
+		pass
+
+	def __enter__(self):
+		self.open()
+		return self
+	def __exit__(self, type, value, tb):
+		self.close()
+
+	def save(self):
+		# Write DS to file
+		with open(self.fname, 'wb') as f:
+			writer = csv.writer(f, delimiter=';', quotechar='"')
+			writer.writerow(self.keys + self.cols)
+			for key in sorted(self.data):
+				line = list(key)
+				v = self.data[key]
+				for col in self.cols:
+					if col in v:
+						line.append(v[col])
+					else:
+						line.append(None)
+				writer.writerow(line)
+
+	def addRow(self, keys, values):
+		key = tuple(keys)
+		if not key in self.data:
+			self.data[key] = {}
+		for i in xrange(0, len(values)):
+			self.data[key][self.cols[i]] = self.flatValue(values[i])
+
+	def addData(self, keys, values):
+		key = tuple(keys)
+		if not key in self.data:
+			self.data[key] = {}
+		for col in values:
+			self.data[key][col] = self.flatValue(values[col])
+
+	def hasEntry(self, keys, fullLine = True):
+		key = tuple(keys)
+		if key not in self.data:
+			return False
+		if not fullLine:
+			return True
+		for c in self.cols:
+			if c not in self.data[key]:
+				return False
+		return True
+
+	def __contains__(self, keys):
+		return self.hasEntry(keys, False)
+	def __getitem__(self, keys):
+		return self.data[tuple(keys)]
+
+	def flatValue(self, value):
+		if isinstance(value, tuple) and len(value) == 1:
+			return value[0];
+		return value;
+
+
+
+"""
+with Database("test.csv", ["a", "b"], ["val1"]) as db:
+	print db.keys
+	print db.cols
+	db.addRow(["1","2"], ["5"])
+	db.addRow(["1","2"], ["6"])
+	db.addRow(["1","3"], ["7"])
+	print db.data
+	db.save()
+	print "Ready!"
+
+print "Done"
+"""
