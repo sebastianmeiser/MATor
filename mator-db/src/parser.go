@@ -304,16 +304,13 @@ func ParseAndInsert(month time.Time, mainFile string, complementaryFile string, 
 		nodes[keyNode][0].Published = time.Date(myyear, mymonth, myday-1, myhour, mymin, mysec, 0, loci)
 
 		loci = tmp.Location()
-		logger.Println("got location ")
 
 		myyear, mymonth, myday = tmp.Date()
 	        myhour, mymin, mysec = tmp.Clock()
-	    logger.Println("i am here")
 
 		//nodes[keyNode][0].Published = nodes[keyNode][0].Published.AddDate(0, 0, -1)
 		// Trying to fix a weird bug in AddDate
 		nodes[keyNode][0].Published = time.Date(myyear, mymonth, myday-1, myhour, mymin, mysec, 0, loci)
-        logger.Println("date added")
 		l := len(nodes[keyNode])
 		for keyDescriptor := range nodes[keyNode] {
 
