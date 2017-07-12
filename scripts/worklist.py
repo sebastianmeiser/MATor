@@ -53,9 +53,9 @@ class MATorWorklist(object):
             self.configSet.add(config)
 
     def addAdversary(self, name, adversary):
-        if adversary not in self.adversarySet:
+        if name not in self.adversarySet:
             self.adversaries.append((name, adversary))
-            self.adversarySet.add(adversary)
+            self.adversarySet.add(name)
 
     def addConsensus(self, name, consensus, precise=False, network=False):
         if name not in self.consensusSet:
