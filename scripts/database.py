@@ -1,5 +1,6 @@
 import csv
 import os
+import sys
 
 
 class Database(object):
@@ -23,20 +24,20 @@ class Database(object):
 	def open(self):
 		# Load DS from file
 		if os.path.isfile(self.fname):
-			with open(self.fname, 'rb') as f:
-				reader = csv.reader(f, delimiter=';', quotechar='"')
-				headers = reader.next()
-				if headers[:len(self.keys)] != self.keys:
-					raise Exception("Mismatching keys!")
-				for h in headers[len(self.keys):]:
-					if h not in self.cols:
-						self.cols.append(h)
-				for x in reader:
-					key = tuple(x[:len(self.keys)])
-					if not key in self.data:
-						self.data[key] = {}
-					for i in xrange(len(self.keys), len(x)):
-						self.data[key][headers[i]] = x[i]
+			f = open(self.fname, 'rb') if sys.version_info[0] < 3 else open(self.name,'r')
+			reader = csv.reader(f, delimiter=';', quotechar='"')
+			headers = reader.next()
+			if headers[:len(self.keys)] != self.keys:
+				raise Exception("Mismatching keys!")
+			for h in headers[len(self.keys):]:
+				if h not in self.cols:
+					self.cols.append(h)
+			for x in reader:
+				key = tuple(x[:len(self.keys)])
+				if not key in self.data:
+					self.data[key] = {}
+				for i in xrange(len(self.keys), len(x)):
+					self.data[key][headers[i]] = x[i]
 			print "Database:",len(self.data),"rows loaded!"
 
 	def close(self):
@@ -50,18 +51,18 @@ class Database(object):
 
 	def save(self):
 		# Write DS to file
-		with open(self.fname, 'wb') as f:
-			writer = csv.writer(f, delimiter=';', quotechar='"')
-			writer.writerow(self.keys + self.cols)
-			for key in sorted(self.data):
-				line = list(key)
-				v = self.data[key]
-				for col in self.cols:
-					if col in v:
-						line.append(v[col])
-					else:
-						line.append(None)
-				writer.writerow(line)
+		f = open(self.fname, 'wb') if sys.version_info[0] < 3 else open(self.fname, 'w', newline="\n", encoding="utf-8")
+		writer = csv.writer(f, delimiter=';', quotechar='"')
+		writer.writerow(self.keys + self.cols)
+		for key in sorted(self.data):
+			line = list(key)
+			v = self.data[key]
+			for col in self.cols:
+				if col in v:
+					line.append(v[col])
+				else:
+					line.append(None)
+			writer.writerow(line)
 
 	def addRow(self, keys, values):
 		key = tuple(keys)
