@@ -1,12 +1,12 @@
-sudo apt-get install git
+sudo apt-get -y install git
 cd ~/
 git clone https://sebastianmeiser/MATor
 cd MATor
-sudo apt-get install libboost-all-dev
-sudo apt-get install glpk-utils
-sudo apt-get install cmake
-sudo apt-get install libsqlite3-dev
-sudo apt-get install golang
+sudo apt-get -y install libboost-all-dev
+sudo apt-get -y install glpk-utils
+sudo apt-get -y install cmake
+sudo apt-get -y install libsqlite3-dev
+sudo apt-get -y install golang
 mkdir build
 cd build
 cmake ..
