@@ -12,13 +12,13 @@ def findPyMATor():
 		for d in [basedir, scriptdir, basedir + "/build/Release/lib", os.path.dirname(basedir) + "/" + vsDir + "/Release_Python", os.path.dirname(basedir) + "/" + vsDir + "/Debug_Python"]:
 			if os.path.isfile(d + "/" + libname):
 				sys.path.append(d)
-				print "[pyMATor] Found library in path:",d
+				print("[pyMATor] Found library in path:",d)
 				return
 		raise Exception("[pyMATor] Did not find pymator. Please copy the pymator.so or pymator.pyd in this directory!")
 
 findPyMATor()
 from pymator import *
-print "hi"
+print("hi")
 
 class MATorConfig(object):
 	"""Configuration storage for a MATor instance"""

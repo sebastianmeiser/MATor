@@ -38,7 +38,7 @@ def costs_country_FVEYES(relay,costs):
 
 
 # Just for debugging purposes - what C++ knows about our hardware
-print "MATor detected",hardwareConcurrency(),"CPU Cores."
+print("MATor detected",hardwareConcurrency(),"CPU Cores.")
 
 # Sample code
 basedir = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) #svn branch root

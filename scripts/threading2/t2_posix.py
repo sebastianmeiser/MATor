@@ -155,7 +155,7 @@ if hasattr(libc,"sched_setaffinity"):
         if not _HAVE_ADJUSTED_CPUSET_SIZE:
             _do_get_affinity(pid)
         affinity = CPUSet(affinity)
-        print "AFFINITY", affinity
+        print("AFFINITY", affinity)
         mask = _cpuset()
         bitmask = affinity.to_bitmask()
         chunkmask = 2**(8*sizeof(_cpuset_bits_t))-1

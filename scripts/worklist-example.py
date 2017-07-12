@@ -6,7 +6,7 @@ from database import *
 
 
 # Just for debugging purposes - what C++ knows about our hardware
-print "MATor detected",hardwareConcurrency(),"CPU Cores."
+print("MATor detected",hardwareConcurrency(),"CPU Cores.")
 
 # Sample code
 basedir = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) #svn branch root
@@ -35,7 +35,7 @@ config4 = MATorConfig(s2, s1, r1, r2, ps, ps)
 # Example adversary cost function - inline example below
 def addTwo(relay, costs):
 	# debug message - you can access all relay's information here
-	print "Found",relay.ip," ("+relay.name+")"
+	print("Found",relay.ip," ("+relay.name+")")
 	return costs + 2 # => costs = 3 for all relays
 
 

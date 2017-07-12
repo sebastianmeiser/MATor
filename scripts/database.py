@@ -38,7 +38,7 @@ class Database(object):
 					self.data[key] = {}
 				for i in xrange(len(self.keys), len(x)):
 					self.data[key][headers[i]] = x[i]
-			print "Database:",len(self.data),"rows loaded!"
+			print("Database:",len(self.data),"rows loaded!")
 
 	def close(self):
 		pass
@@ -100,17 +100,3 @@ class Database(object):
 		return value;
 
 
-
-"""
-with Database("test.csv", ["a", "b"], ["val1"]) as db:
-	print db.keys
-	print db.cols
-	db.addRow(["1","2"], ["5"])
-	db.addRow(["1","2"], ["6"])
-	db.addRow(["1","3"], ["7"])
-	print db.data
-	db.save()
-	print "Ready!"
-
-print "Done"
-"""

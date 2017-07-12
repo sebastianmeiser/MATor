@@ -48,10 +48,10 @@ start = time.clock()
 sa   = m.getSenderAnonymity()
 ra   = m.getRecipientAnonymity()
 rela = m.getRelationshipAnonymity()
-print "SA   =",sa
-print "RA   =",ra
-print "RelA =",rela
-print "Took: ",formatDuration(time.clock()-start)
+print("SA   =",sa)
+print("RA   =",ra)
+print("RelA =",rela)
+print("Took: ",formatDuration(time.clock()-start))
 
 
 
@@ -61,6 +61,6 @@ m.setAdversary(adv)
 sa   = m.getSenderAnonymity()
 ra   = m.getRecipientAnonymity()
 rela = m.getRelationshipAnonymity()
-print "SA   =",sa
-print "RA   =",ra
-print "RelA =",rela
+print("SA   =",sa)
+print("RA   =",ra)
+print("RelA =",rela)
