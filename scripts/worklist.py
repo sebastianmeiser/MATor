@@ -48,9 +48,9 @@ class MATorWorklist(object):
         self.db.addColumns(["SA", "RA", "RelA", "PreciseSA", "PreciseRA", "PreciseRelA"])
 
     def addConfig(self, name, config):
-        if config not in self.configSet:
+        if name not in self.configSet:
             self.configs.append((name, config))
-            self.configSet.add(config)
+            self.configSet.add(name)
 
     def addAdversary(self, name, adversary):
         if name not in self.adversarySet:
