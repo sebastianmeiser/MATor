@@ -114,7 +114,7 @@ class MATorWorklist(object):
                         self.currentAdversary = advname
                         self.update()
                         dbkey = [conname, configname, advname]
-                        if dbkey in self.db and (con not in self.preciseConsensusSet or (
+                        if dbkey in self.db and (conname not in self.preciseConsensusSet or (
                                 "PreciseSA" in self.db[dbkey] and self.db[dbkey]["PreciseSA"] != "")):
                             # skip
                             partial = True
@@ -148,7 +148,7 @@ class MATorWorklist(object):
                         self.db.save()
                     # did any work?
                     if mator is not None:
-                        self.finish(partial, con in self.preciseConsensusSet, time.time() - starttime)
+                        self.finish(partial, conname in self.preciseConsensusSet, time.time() - starttime)
                         self.update(True)
         self.finishedAll()
 
@@ -200,13 +200,13 @@ class MATorWorklist(object):
                 partial = False
                 for (advname, adversary) in self.adversaries:
                     dbkey = [conname, configname, advname]
-                    if dbkey in self.db and (con not in self.preciseConsensusSet or (
+                    if dbkey in self.db and (conname not in self.preciseConsensusSet or (
                             "PreciseSA" in self.db[dbkey] and self.db[dbkey]["PreciseSA"] != "")):
                         partial = True
                         continue
                     work = True
                 if work:
-                    self.workcount[partial][con in self.preciseConsensusSet] += 1
+                    self.workcount[partial][conname in self.preciseConsensusSet] += 1
                     self.workcountAll += 1
                 else:
                     nothingToDo += 1
