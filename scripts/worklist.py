@@ -58,20 +58,20 @@ class MATorWorklist(object):
             self.adversarySet.add(adversary)
 
     def addConsensus(self, name, consensus, precise=False, network=False):
-        if consensus not in self.consensusSet:
+        if name not in self.consensusSet:
             self.consensus.append((name, consensus))
-            self.consensusSet.add(consensus)
+            self.consensusSet.add(name)
             if network:
-                self.networkConsensusSet.add(consensus)
+                self.networkConsensusSet.add(name)
             else:
                 if precise:
-                    self.preciseConsensusSet.add(consensus)
+                    self.preciseConsensusSet.add(name)
 
     def addNetworkConsensus(self, name, consensus):
-        if consensus not in self.consensusSet:
+        if name not in self.consensusSet:
             self.consensus.append((name, consensus))
-            self.consensusSet.add(consensus)
-            self.networkConsensusSet.add(consensus)
+            self.consensusSet.add(name)
+            self.networkConsensusSet.add(name)
 
     def progress(self):
         print ("")
@@ -124,7 +124,7 @@ class MATorWorklist(object):
                             mator = config.createMATor(matorcon)
                             mator.prepare()
                         results = {}
-                        if con in self.networkConsensusSet:
+                        if conname in self.networkConsensusSet:
                             mator.prepareNetworkCalculation(adversary.split(" "))
                             results["SA"] = mator.getNetworkSenderAnonymity()
                             results["RA"] = mator.getNetworkRecipientAnonymity(),
@@ -139,7 +139,7 @@ class MATorWorklist(object):
                         results["RelA"] = mator.getRelationshipAnonymity()
 
                         # precise calculations?
-                        if con in self.preciseConsensusSet:
+                        if conname in self.preciseConsensusSet:
                             results["PreciseSA"] = mator.getGreedyPreciseSenderAnonymity()
                             results["PreciseRA"] = mator.getGreedyPreciseRecipientAnonymity()
                             results["PreciseRelA"] = mator.getGreedyPreciseRelationshipAnonymity()
