@@ -1,0 +1,6 @@
+build
+data
+mator-db/go
+mator-db/mator-db
+*__pycache__
+scripts/test.csv
