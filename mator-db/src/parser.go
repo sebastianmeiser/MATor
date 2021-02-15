@@ -16,8 +16,9 @@ import (
 	"mator-db/asn"
 
 	"github.com/NullHypothesis/zoossh"
-	"xi2.org/x/xz"
+	"github.com/xi2/xz"
 )
+
 //	"github.com/dmgawel/zoossh"
 
 type TimelineEntry struct {
@@ -298,7 +299,7 @@ func ParseAndInsert(month time.Time, mainFile string, complementaryFile string, 
 		tmp := nodes[keyNode][0].Published
 		loci := tmp.Location()
 		myyear, mymonth, myday := tmp.Date()
-	        myhour, mymin, mysec := tmp.Clock()
+		myhour, mymin, mysec := tmp.Clock()
 		//nodes[keyNode][0].Published = nodes[keyNode][0].Published.AddDate(0, 0, -1)
 		// Trying to fix a weird bug in AddDate
 		nodes[keyNode][0].Published = time.Date(myyear, mymonth, myday-1, myhour, mymin, mysec, 0, loci)
@@ -306,7 +307,7 @@ func ParseAndInsert(month time.Time, mainFile string, complementaryFile string, 
 		loci = tmp.Location()
 
 		myyear, mymonth, myday = tmp.Date()
-	        myhour, mymin, mysec = tmp.Clock()
+		myhour, mymin, mysec = tmp.Clock()
 
 		//nodes[keyNode][0].Published = nodes[keyNode][0].Published.AddDate(0, 0, -1)
 		// Trying to fix a weird bug in AddDate
