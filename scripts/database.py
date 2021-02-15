@@ -36,7 +36,7 @@ class Database(object):
 				key = tuple(x[:len(self.keys)])
 				if not key in self.data:
 					self.data[key] = {}
-				for i in xrange(len(self.keys), len(x)):
+				for i in range(len(self.keys), len(x)):
 					self.data[key][headers[i]] = x[i]
 			print("Database:",len(self.data),"rows loaded!")
 
@@ -68,7 +68,7 @@ class Database(object):
 		key = tuple(keys)
 		if not key in self.data:
 			self.data[key] = {}
-		for i in xrange(0, len(values)):
+		for i in range(0, len(values)):
 			self.data[key][self.cols[i]] = self.flatValue(values[i])
 
 	def addData(self, keys, values):
