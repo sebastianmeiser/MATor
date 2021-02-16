@@ -107,7 +107,7 @@ func main() {
 		return
 	}
 
-	_, err = DbSetupAndOpen(dbPath)
+	db, err := DbSetupAndOpen(dbPath)
 	if err != nil {
 		fatal.Fatal("Error while setting up database:", err)
 	}
@@ -128,7 +128,7 @@ func main() {
 		tmpDir = DataDir
 	}
 
-	if db, err := os.Stat(tmpDir); os.IsNotExist(err) {
+	if _, err := os.Stat(tmpDir); os.IsNotExist(err) {
 		fatal.Fatal("Temporary directory ", tmpDir, " does not exists. Exiting now")
 	}
 
@@ -176,7 +176,7 @@ func main() {
 	}
 	logger.Println("GeoIP databse prepared.")
 
-	// // Finally, parse it
+	// Finally, parse it
 	logger.Println("Now starting parsing...")
 	ParseAndInsert(month, pathMain, pathComp, pathsRecent, db, GeoReader)
 	logger.Println("I'm done. Bye.")
