@@ -44,14 +44,14 @@ m = config.createMATor(con)
 # Define adversary inline (saves "commit" handling)
 m.setAdversary(MATorAdversary(10))
 
-start = time.clock()
+start = time.process_time()
 sa   = m.getSenderAnonymity()
 ra   = m.getRecipientAnonymity()
 rela = m.getRelationshipAnonymity()
 print("SA   =",sa)
 print("RA   =",ra)
 print("RelA =",rela)
-print("Took: ",formatDuration(time.clock()-start))
+print("Took: ",formatDuration(time.process_time()-start))
 
 
 

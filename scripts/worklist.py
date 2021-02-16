@@ -95,7 +95,7 @@ class MATorWorklist(object):
                     matorcon = con.load()
                     exceptionOcc=0
                 except (RuntimeError, ValueError) as err:
-                    print ("exception caught")
+                    print ("exception caught " + str(err))
                     parts= conname.split("-")
                     if int(parts[3])<=22:
                         conname= parts[0]+ "-" + parts[1] + "-" +  parts[2] + "-" + strTwoDigit(int(parts[3])+1)
@@ -103,6 +103,7 @@ class MATorWorklist(object):
                         #conname= parts[0]+ "-" + parts[1] + "-" +   strTwoDigit(int(parts[2])+1) + "-" + "00"
                     else: 
                         break
+                    print("Opening: " + basedir+"/mator-db/server-descriptors-"+parts[0]+ "-" + parts[1]+".db")
                     con=MATorConsensus(basedir+"/build/Release/data/consensuses-"+parts[0]+ "-" + parts[1]+"/"+ parts[2]+"/"+ conname+"-00-00-consensus", basedir+"/mator-db/server-descriptors-"+parts[0]+ "-" + parts[1]+".db")
             if not exceptionOcc:
                 for (configname, config) in self.configs:

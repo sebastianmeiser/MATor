@@ -43,8 +43,10 @@ print("MATor detected",hardwareConcurrency(),"CPU Cores.")
 # Sample code
 basedir = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) #svn branch root
 
+print("base dir: " + str(basedir))
+
 #yearmonths = ["2014-08","2014-09"]
-years = ["2014","2015","2016"]
+years = ["2014"]
 #yearmonths = ["2014-08"]
 #days = ["01"]
 #days = ["01"]
@@ -153,7 +155,7 @@ with Database("deltas.csv", ["consensus", "config", "adversary"]) as db:
 			days= monthrange(int(YM.split("-")[0]), int(YM.split("-")[1]))
 			for D in range(1, days[1]+1):
 				DAY=strTwoDigit(D)
-				for H in xrange(12,24,12):
+				for H in range(12,24,12):
 					HOUR=strTwoDigit(H)
 					wl.addConsensus(YM+"-"+DAY+"-"+HOUR, MATorConsensus(basedir+"/build/Release/data/consensuses-"+YM+"/"+DAY+"/"+YM+"-"+DAY+"-"+HOUR+"-00-00-consensus", basedir+"/mator-db/server-descriptors-"+YM+".db"))
 

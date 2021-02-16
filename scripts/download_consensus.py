@@ -11,7 +11,7 @@ def unpack(file_name_tar_xz):
     print("Starting decompression ..")
     with contextlib.closing(lzma.LZMAFile(file_name_tar_xz)) as xz:
         with tarfile.open(fileobj=xz) as f:
-            f.extractall('../data/consensuses/')
+            f.extractall('../data')
 
 
 def main():
@@ -58,7 +58,7 @@ def main():
                     break
                 print(month, year)
                 file_name_tar_xz = "../data/consensuses-" + year.__str__() + "-" + month + ".tar.xz"
-                consensuses_folder = "../data/consensuses/consensuses-" + year.__str__() + "-" + month
+                consensuses_folder = "../data/consensuses-" + year.__str__() + "-" + month
                 url = "https://collector.torproject.org/archive/relay-descriptors/consensuses/consensuses-" + year.__str__() + "-" + month + ".tar.xz"
                 if os.path.exists(file_name_tar_xz):
                     print("File exists :" + file_name_tar_xz)

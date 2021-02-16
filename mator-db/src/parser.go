@@ -213,7 +213,7 @@ func parseArchive(filename string) chan *zoossh.RouterDescriptor {
 	return c
 }
 
-func ParseAndInsert(month time.Time, mainFile string, complementaryFile string, recentFiles []string, db *DbWrapper, geo *GeoReader) {
+func ParseAndInsert(month time.Time, mainFile string, complementaryFile string, recentFiles []string, db *DbWrapper) {
 
 	lastID := 1
 

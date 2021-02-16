@@ -90,7 +90,7 @@ if hasattr(pthread,"pthread_setaffinity_np"):
             raise OSError(res,"pthread_get_affinity_np")
         intmask = 0
         shift = 8*sizeof(_cpuset_bits_t)
-        for i in xrange(len(mask.bits)):
+        for i in range(len(mask.bits)):
             intmask |= mask.bits[i] << (i*shift)
         return CPUSet(intmask)
 else:
@@ -159,7 +159,7 @@ if hasattr(libc,"sched_setaffinity"):
         mask = _cpuset()
         bitmask = affinity.to_bitmask()
         chunkmask = 2**(8*sizeof(_cpuset_bits_t))-1
-        for i in xrange(_CPUSET_SIZE):
+        for i in range(_CPUSET_SIZE):
             mask.bits[i] = bitmask & chunkmask
             bitmask = bitmask >> (8*sizeof(_cpuset_bits_t))
         if libc.sched_setaffinity(pid,sizeof(mask),byref(mask)) < 0:
@@ -177,7 +177,7 @@ if hasattr(libc,"sched_setaffinity"):
             raise OSError(eno,"sched_getaffinity")
         intmask = 0
         shift = 8*sizeof(_cpuset_bits_t)
-        for i in xrange(len(mask.bits)):
+        for i in range(len(mask.bits)):
             intmask |= mask.bits[i] << (i*shift)
         return CPUSet(intmask)
 
