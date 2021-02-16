@@ -1,5 +1,5 @@
-build
-data
+build/*
+data/*
 mator-db/go
 mator-db/mator-db
 scripts/test.csv
