@@ -9,3 +9,4 @@ scripts/test.csv
 *.db
 *__pycache__
 *.mmdb
+*.db-journal
