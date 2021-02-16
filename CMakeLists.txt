@@ -59,6 +59,9 @@ if(MAKE_TESTS)
                          COMMAND ${CMAKE_BINARY_DIR}/Testing/Bin/${testName})
         endforeach(testSrc)
         
+        # Copy data to Realse folder 
+        file(COPY data DESTINATION ${CMAKE_BINARY_DIR}/${RELEASE_FOLDER})
+
         # Copy necessary data files for tests
         file(COPY test/Data DESTINATION ${CMAKE_BINARY_DIR}/Testing/)
 endif()
