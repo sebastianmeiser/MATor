@@ -10,8 +10,6 @@ import (
 	"regexp"
 	"sync"
 	"time"
-
-	"github.com/klauspost/compress/gzip"
 )
 
 func isURL(url string) bool {
@@ -103,45 +101,4 @@ func prepareRecentDescriptors(tmpDir string, source string, redownload bool) ([]
 
 	wg.Wait()
 	return paths, nil
-}
-
-func prepareGeoDatabase(tmpDir string) (string, error) {
-	var (
-		filename string
-		path     string
-	)
-
-	filename = "GeoLite2-City.mmdb"
-	path = filepath.Join(tmpDir, filename)
-
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-
-		// Create file
-		writer, err := os.Create(path)
-		if err != nil {
-			return "", err
-		}
-		defer writer.Close()
-
-		// Download file
-		resp, err := http.Get("http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz")
-		if err != nil {
-			return "", err
-		}
-		defer resp.Body.Close()
-
-		// Ungzip file
-		greader, err := gzip.NewReader(resp.Body)
-		if err != nil {
-			return "", err
-		}
-		defer greader.Close()
-
-		// Save contents to file
-		if _, err = io.Copy(writer, greader); err != nil {
-			return "", err
-		}
-	}
-
-	return path, nil
 }
