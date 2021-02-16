@@ -2,5 +2,10 @@ build
 data
 mator-db/go
 mator-db/mator-db
-*__pycache__
 scripts/test.csv
+
+# ignore generated files 
+*.tar.xz
+*.db
+*__pycache__
+*.mmdb
