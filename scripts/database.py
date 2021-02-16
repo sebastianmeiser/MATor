@@ -24,9 +24,9 @@ class Database(object):
 	def open(self):
 		# Load DS from file
 		if os.path.isfile(self.fname):
-			f = open(self.fname, 'rb') if sys.version_info[0] < 3 else open(self.name,'r')
+			f = open(self.fname, 'rb') if sys.version_info[0] < 3 else open(self.fname,'r')
 			reader = csv.reader(f, delimiter=';', quotechar='"')
-			headers = reader.next()
+			headers = next(reader)
 			if headers[:len(self.keys)] != self.keys:
 				raise Exception("Mismatching keys!")
 			for h in headers[len(self.keys):]:
