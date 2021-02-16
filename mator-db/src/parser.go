@@ -56,7 +56,10 @@ func daysIn(m time.Month, year int) int {
 }
 
 func FingerprintToId(fingerprint zoossh.Fingerprint) int {
-	return ids[fingerprint]
+	mu.Lock()
+	id := ids[fingerprint]
+	mu.Unlock()
+	return id
 }
 
 // extractDescriptor extracts the first server descriptor from the given string
@@ -288,7 +291,9 @@ func ParseAndInsert(month time.Time, mainFile string, complementaryFile string, 
 	// Prepare descriptors
 	for keyNode := range nodes {
 
+		mu.Lock()
 		ids[keyNode] = lastID
+		mu.Unlock()
 		lastID++
 		db.node <- keyNode
 
