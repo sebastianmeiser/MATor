@@ -12,7 +12,7 @@ cp -r src/asn go/src/mator-db/
 #export GOPATH=`pwd`/go
 export GOPATH="$SCRIPTPATH/go"
 cd go/src/mator-db/
+go mod init
 go get
-go install
 cd -
 cp go/bin/mator-db ./
