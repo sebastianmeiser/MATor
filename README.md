@@ -26,16 +26,15 @@ Steps 1 & 2 will populate the ```/data``` directory with the necessary Tor conse
 To compile and build the MaTor executable (tested on macOS): 
 
 1. Install dependencies: 
-	- boost
-	- sqlite3
-	- glpk
+	- boost (on Ubuntu: sudo apt-get install libboost-all-dev) 
+	- sqlite3 (on Ubuntu: sudo apt-get install sqlite3 libsqlite3-dev)
+	- glpk (on Ubuntu: sudo apt-get install -y python-glpk) 
 
 2. To enable optimization type: 
 	  ```export CXXFLAGS=-O2```
 
 3. go to the build directory: 
     ```
-    cd build
     cd [your_path]/MATor/build
     cmake ..
     make
