@@ -1,0 +1,12 @@
+build/*
+data/*
+mator-db/go
+mator-db/mator-db
+scripts/test.csv
+
+# ignore generated files 
+*.tar.xz
+*.db
+*__pycache__
+*.mmdb
+*.db-journal

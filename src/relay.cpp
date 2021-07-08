@@ -28,6 +28,11 @@ void Relay::addPolicy(const std::string& entry)
 		line = line.substr(7);
 		
 		clogvn(" stripped to " << line);
+
+		if (line.empty()) {
+			clogvn("Skipped this line");
+			continue ; 
+		}
 		
 		size_t t = line.find(':');
 		std::string addr = line.substr(0, t);

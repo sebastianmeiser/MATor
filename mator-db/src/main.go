@@ -14,6 +14,7 @@ import (
 	"github.com/NullHypothesis/zoossh"
 	"github.com/docopt/docopt-go"
 )
+
 // Before we used: "github.com/dmgawel/zoossh"
 
 const (
@@ -48,6 +49,7 @@ var (
 	geoips             map[string]bool                                   = make(map[string]bool)
 	ips                []net.IP
 	GeoDB              *GeoReader
+	mu                 sync.Mutex
 )
 
 // Logger
@@ -164,11 +166,8 @@ func main() {
 	logger.Println("All descriptors prepared.")
 
 	// Setup GeoIP databse
+	geoPath := "./" + "GeoLite2-City.mmdb"
 	logger.Println("Getting GeoIP database...")
-	geoPath, err := prepareGeoDatabase(tmpDir)
-	if err != nil {
-		fatal.Fatal("Error while setting up geo database:", err)
-	}
 	GeoReader, err := GeoOpen(geoPath)
 	if err != nil {
 		fatal.Fatal("Error while opening geo database:", err)

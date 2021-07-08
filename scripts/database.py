@@ -24,9 +24,9 @@ class Database(object):
 	def open(self):
 		# Load DS from file
 		if os.path.isfile(self.fname):
-			f = open(self.fname, 'rb') if sys.version_info[0] < 3 else open(self.name,'r')
+			f = open(self.fname, 'rb') if sys.version_info[0] < 3 else open(self.fname,'r')
 			reader = csv.reader(f, delimiter=';', quotechar='"')
-			headers = reader.next()
+			headers = next(reader)
 			if headers[:len(self.keys)] != self.keys:
 				raise Exception("Mismatching keys!")
 			for h in headers[len(self.keys):]:
@@ -36,7 +36,7 @@ class Database(object):
 				key = tuple(x[:len(self.keys)])
 				if not key in self.data:
 					self.data[key] = {}
-				for i in xrange(len(self.keys), len(x)):
+				for i in range(len(self.keys), len(x)):
 					self.data[key][headers[i]] = x[i]
 			print("Database:",len(self.data),"rows loaded!")
 
@@ -68,7 +68,7 @@ class Database(object):
 		key = tuple(keys)
 		if not key in self.data:
 			self.data[key] = {}
-		for i in xrange(0, len(values)):
+		for i in range(0, len(values)):
 			self.data[key][self.cols[i]] = self.flatValue(values[i])
 
 	def addData(self, keys, values):

@@ -4264,7 +4264,7 @@ class basic_json
             switch (lhs_type)
             {
                 case (value_t::array):
-                    return *lhs.m_value.array < *rhs.m_value.array;
+                    return (*lhs.m_value.array) < *rhs.m_value.array;
                 case (value_t::object):
                     return *lhs.m_value.object < *rhs.m_value.object;
                 case (value_t::null):

@@ -8,12 +8,10 @@
 package main
 
 import (
-	"github.com/oschwald/maxminddb-golang"
 	"net"
-)
 
-const mmdb_geolite2_city_url string = "http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz"
-const mmdb_geolite2_city_md5_url string = "http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.md5"
+	"github.com/oschwald/maxminddb-golang"
+)
 
 type GeoRow struct {
 	Country struct {

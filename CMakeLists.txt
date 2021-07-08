@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 project(mator_project)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
@@ -19,7 +19,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${RELEASE_FOLDER}/lib)
 
 configure_file(data/config.json "${CMAKE_BINARY_DIR}/config.json" COPYONLY)
 
-add_definitions("-std=c++11 -mfpmath=sse -Ofast -fPIC -march=native -funroll-loops -funsafe-math-optimizations")
+add_definitions("-std=c++11 -mfpmath=sse -Ofast -fPIC -march=native -funroll-loops -funsafe-math-optimizations -I /usr/local/include")
 
 add_subdirectory(src)
 
@@ -59,6 +59,9 @@ if(MAKE_TESTS)
                          COMMAND ${CMAKE_BINARY_DIR}/Testing/Bin/${testName})
         endforeach(testSrc)
         
+        # Copy data to Realse folder 
+        file(COPY data DESTINATION ${CMAKE_BINARY_DIR}/${RELEASE_FOLDER})
+
         # Copy necessary data files for tests
         file(COPY test/Data DESTINATION ${CMAKE_BINARY_DIR}/Testing/)
 endif()
@@ -67,7 +70,7 @@ endif()
 
 if(MAKE_PYTHON)
     # Add a CMake parameter for choosing a desired Python version
-    set(EXAMPLE_PYTHON_VERSION  2.7.9 CACHE STRING "Python version to use for compiling the mator_project library")
+    set(EXAMPLE_PYTHON_VERSION  CACHE STRING "Python version to use for compiling the mator_project library")
     include(CheckCXXCompilerFlag)
     add_definitions("-DUSE_PYTHON=1")
 
